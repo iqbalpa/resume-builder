@@ -7,6 +7,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { setUser } from '@/store/userSlice';
 import { useRouter } from 'next/navigation';
 import Stepper from '@/components/stepper/stepper';
+import UserInfoForm from '@/components/form/userInfo';
+import EducationForm from '@/components/form/education';
+import WorkingExperienceForm from '@/components/form/working';
+import ProjectForm from '@/components/form/project';
+import SkillForm from '@/components/form/skill';
 
 type UserInputs = {
   name: string;
@@ -65,6 +70,23 @@ const HomeModule: React.FC = () => {
     });
   };
 
+  const renderStepContent = () => {
+    switch (currentStep) {
+      case 1:
+        return <UserInfoForm />;
+      case 2:
+        return <EducationForm />;
+      case 3:
+        return <WorkingExperienceForm />;
+      case 4:
+        return <ProjectForm />;
+      case 5:
+        return <SkillForm />;
+      default:
+        return <UserInfoForm />;
+    }
+  };
+
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       <div className="flex w-3/5 flex-col gap-3 rounded-md border-2 border-slate-500 p-5">
@@ -76,7 +98,10 @@ const HomeModule: React.FC = () => {
         <h1 className="text-center text-2xl font-bold">
           {steps.find((step) => step.id === currentStep)?.label}
         </h1>
-        <form
+
+        {renderStepContent()}
+
+        {/* <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-full flex-col"
         >
@@ -127,31 +152,31 @@ const HomeModule: React.FC = () => {
                 This field is required
               </span>
             )}
-          </div>
-          <div className="mt-4 flex justify-between">
-            <button
-              type="button"
-              onClick={prevStep}
-              disabled={currentStep === 1}
-              className="rounded-lg bg-gray-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-gray-700 disabled:bg-gray-300"
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              onClick={nextStep}
-              disabled={currentStep === 5}
-              className="rounded-lg bg-emerald-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-emerald-700"
-            >
-              Next
-            </button>
-          </div>
-          {/* <input
+          </div> */}
+        <div className="mt-4 flex justify-between">
+          <button
+            type="button"
+            onClick={prevStep}
+            disabled={currentStep === 1}
+            className="rounded-lg bg-gray-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-gray-700 disabled:bg-gray-300"
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            onClick={nextStep}
+            disabled={currentStep === 5}
+            className="rounded-lg bg-emerald-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-emerald-700"
+          >
+            Next
+          </button>
+        </div>
+        {/* <input
             type="submit"
             value="Next"
             className="rounded-lg bg-emerald-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-emerald-700"
           /> */}
-        </form>
+        {/* </form>  */}
       </div>
     </div>
   );
