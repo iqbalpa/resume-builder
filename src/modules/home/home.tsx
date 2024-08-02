@@ -2,22 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Mail, Phone, User } from 'lucide-react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { setUser } from '@/store/userSlice';
-import { useRouter } from 'next/navigation';
 import Stepper from '@/components/stepper/stepper';
 import UserInfoForm from '@/components/form/userInfo';
 import EducationForm from '@/components/form/education';
 import WorkingExperienceForm from '@/components/form/working';
 import ProjectForm from '@/components/form/project';
 import SkillForm from '@/components/form/skill';
-
-type UserInputs = {
-  name: string;
-  email: string;
-  phone: string;
-};
 
 interface step {
   id: number;
@@ -41,11 +33,6 @@ const HomeModule: React.FC = () => {
   }, [currentStep]);
 
   const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserInputs>();
 
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     dispatch(setUser(data));
@@ -101,58 +88,6 @@ const HomeModule: React.FC = () => {
 
         {renderStepContent()}
 
-        {/* <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex w-full flex-col"
-        >
-          <div className="mb-2 flex flex-col">
-            <p className="mb-1 font-semibold">Name</p>
-            <div className="flex flex-row items-center">
-              <input
-                placeholder="name"
-                {...register('name', { required: true })}
-                className="mr-2 grow rounded-md border-[1px] border-slate-400 px-4 py-2"
-              />
-              <User />
-            </div>
-            {errors.name && (
-              <span className="text-sm text-red-500">
-                This field is required
-              </span>
-            )}
-          </div>
-          <div className="mb-2 flex flex-col">
-            <p className="mb-1 font-semibold">Email</p>
-            <div className="flex flex-row items-center">
-              <input
-                placeholder="email"
-                {...register('email', { required: true })}
-                className="mr-2 grow rounded-md border-[1px] border-slate-400 px-4 py-2"
-              />
-              <Mail />
-            </div>
-            {errors.email && (
-              <span className="text-sm text-red-500">
-                This field is required
-              </span>
-            )}
-          </div>
-          <div className="mb-2 flex flex-col">
-            <p className="mb-1 font-semibold">Phone</p>
-            <div className="flex flex-row items-center">
-              <input
-                placeholder="phone"
-                {...register('phone', { required: true })}
-                className="mr-2 grow rounded-md border-[1px] border-slate-400 px-4 py-2"
-              />
-              <Phone />
-            </div>
-            {errors.phone && (
-              <span className="text-sm text-red-500">
-                This field is required
-              </span>
-            )}
-          </div> */}
         <div className="mt-4 flex justify-between">
           <button
             type="button"
