@@ -1,12 +1,23 @@
 import React from 'react';
 
-const Stepper: React.FC = () => {
+interface IStepper {
+  steps: { id: number; label: string }[];
+  currentStep: number;
+  setCurrentStep: (step: number) => void;
+}
+
+const Stepper: React.FC<IStepper> = ({
+  steps,
+  currentStep,
+  setCurrentStep,
+}) => {
   return (
     <ul className="steps">
-      <li className="step step-primary">Register</li>
-      <li className="step">Choose plan</li>
-      <li className="step">Purchase</li>
-      <li className="step">Receive Product</li>
+      {steps.map((step) => (
+        <li key={step.id} id={step.id.toString()} className="step">
+          {step.label}
+        </li>
+      ))}
     </ul>
   );
 };
