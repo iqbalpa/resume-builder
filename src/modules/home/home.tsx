@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { Mail, Phone, User } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { setUser } from '@/store/userSlice';
+import { useRouter } from 'next/navigation';
+import Stepper from '@/components/stepper/stepper';
 
 type UserInputs = {
   name: string;
@@ -14,6 +16,7 @@ type UserInputs = {
 
 const HomeModule: React.FC = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -22,11 +25,15 @@ const HomeModule: React.FC = () => {
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     console.log(data);
     dispatch(setUser(data));
+    // setTimeout(() => {
+    //   router.push('/tes');
+    // }, 1000);
   };
 
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <div className="flex w-3/5 flex-col gap-3 rounded-md bg-sky-300 p-5">
+      <div className="flex w-3/5 flex-col gap-3 rounded-md border-2 border-slate-500 p-5">
+        <Stepper />
         <h1 className="text-center text-2xl font-bold">User Information</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
