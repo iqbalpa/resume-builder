@@ -10,7 +10,8 @@ interface Education {
   univ: string;
   year: number;
   major: string;
-  time: string; // ex: Aug. 2021 - Jul. 2025
+  startTime: string;
+  endTime: string;
 }
 
 interface resumeState {

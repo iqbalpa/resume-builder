@@ -2,6 +2,8 @@ import React from 'react';
 import StepButton from '../buttons/button';
 import { useForm } from 'react-hook-form';
 import { Calendar, CalendarRange, Laptop, University } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { setEducation } from '@/store/userSlice';
 
 type EducationInputs = {
   univ: string;
@@ -12,11 +14,15 @@ type EducationInputs = {
 };
 
 const EducationForm: React.FC = () => {
+  const dispatch = useDispatch();
   const {
     register,
-    handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<EducationInputs>();
+  const saveEducation = (data: EducationInputs) => {
+    dispatch(setEducation(data));
+  };
 
   return (
     <form className="flex w-full flex-col">
@@ -98,7 +104,7 @@ const EducationForm: React.FC = () => {
           </div>
         </div>
       </div>
-      <StepButton />
+      <StepButton saveState={saveEducation} getValues={getValues} />
     </form>
   );
 };
