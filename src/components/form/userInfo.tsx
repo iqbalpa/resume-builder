@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Mail, Phone, User } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import StepButton from '../buttons/button';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/store/userSlice';
 
 type UserInputs = {
   name: string;
@@ -10,11 +12,15 @@ type UserInputs = {
 };
 
 const UserInfoForm: React.FC = () => {
+  const dispatch = useDispatch();
   const {
     register,
-    handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<UserInputs>();
+  const saveUser = (data: UserInputs) => {
+    dispatch(setUser(data));
+  };
 
   return (
     <form className="flex w-full flex-col">
@@ -60,7 +66,7 @@ const UserInfoForm: React.FC = () => {
           <span className="text-sm text-red-500">This field is required</span>
         )}
       </div>
-      <StepButton />
+      <StepButton saveState={saveUser} getValues={getValues} />
     </form>
   );
 };
