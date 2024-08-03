@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail, Phone, User } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import StepButton from '../buttons/button';
 
 type UserInputs = {
   name: string;
@@ -59,6 +60,7 @@ const UserInfoForm: React.FC = () => {
           <span className="text-sm text-red-500">This field is required</span>
         )}
       </div>
+      <StepButton />
     </form>
   );
 };

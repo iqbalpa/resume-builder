@@ -1,13 +1,13 @@
 import React from 'react';
 import StepButton from '../buttons/button';
 
-const ProjectForm: React.FC = () => {
+const Review: React.FC = () => {
   return (
     <div>
-      <h1>projects</h1>
+      <h1>review</h1>
       <StepButton />
     </div>
   );
 };
 
-export default ProjectForm;
+export default Review;

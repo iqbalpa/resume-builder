@@ -2,15 +2,9 @@ import React from 'react';
 
 interface IStepper {
   steps: { id: number; label: string }[];
-  currentStep: number;
-  setCurrentStep: (step: number) => void;
 }
 
-const Stepper: React.FC<IStepper> = ({
-  steps,
-  currentStep,
-  setCurrentStep,
-}) => {
+const Stepper: React.FC<IStepper> = ({ steps }) => {
   return (
     <ul className="steps">
       {steps.map((step) => (
