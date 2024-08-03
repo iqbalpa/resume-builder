@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { SubmitHandler } from 'react-hook-form';
-import { setUser } from '@/store/userSlice';
+import { setEducation, setUser } from '@/store/userSlice';
 import Stepper from '@/components/stepper/stepper';
 import UserInfoForm from '@/components/form/userInfo';
 import EducationForm from '@/components/form/education';
@@ -33,10 +33,6 @@ const HomeModule: React.FC = () => {
   }, [currentStep]);
 
   const dispatch = useDispatch();
-
-  const onSubmit: SubmitHandler<UserInputs> = async (data) => {
-    dispatch(setUser(data));
-  };
 
   const nextStep = () => {
     setCurrentStep((prev) => {
@@ -106,12 +102,6 @@ const HomeModule: React.FC = () => {
             Next
           </button>
         </div>
-        {/* <input
-            type="submit"
-            value="Next"
-            className="rounded-lg bg-emerald-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-emerald-700"
-          /> */}
-        {/* </form>  */}
       </div>
     </div>
   );
