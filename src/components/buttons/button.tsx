@@ -19,14 +19,14 @@ const StepButton: React.FC = () => {
       <button
         type="button"
         onClick={handlePrev}
-        className="rounded-lg bg-gray-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-gray-700 disabled:bg-gray-300"
+        className={`rounded-lg bg-gray-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-gray-700 disabled:bg-gray-300 ${currentStep === 1 ? 'bg-gray-400 hover:cursor-not-allowed hover:bg-gray-400' : ''}`}
       >
         Previous
       </button>
       <button
         type="button"
         onClick={handleNext}
-        className="rounded-lg bg-emerald-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-emerald-700"
+        className={`rounded-lg bg-emerald-500 px-4 py-2 text-white duration-100 hover:cursor-pointer hover:bg-emerald-700 ${currentStep === 6 ? 'bg-emerald-300 hover:cursor-not-allowed hover:bg-emerald-300' : ''}`}
       >
         Next
       </button>
