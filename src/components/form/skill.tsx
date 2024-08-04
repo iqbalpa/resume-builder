@@ -5,7 +5,7 @@ const SkillForm: React.FC = () => {
   return (
     <div>
       <h1>skill</h1>
-      <StepButton />
+      <StepButton saveState={() => {}} getValues={() => {}} />
     </div>
   );
 };

@@ -5,7 +5,7 @@ const ProjectForm: React.FC = () => {
   return (
     <div>
       <h1>projects</h1>
-      <StepButton />
+      <StepButton saveState={() => {}} getValues={() => {}} />
     </div>
   );
 };
