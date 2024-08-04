@@ -4,10 +4,12 @@ const MAX_STEP = 6;
 
 interface stepState {
   step: number;
+  visitedSteps: number[];
 }
 
 const initialState: stepState = {
   step: 1,
+  visitedSteps: [1],
 };
 
 export const stepSlice = createSlice({
@@ -15,16 +17,18 @@ export const stepSlice = createSlice({
   initialState,
   reducers: {
     nextStep: (state: stepState) => {
-      if (state.step === MAX_STEP) {
-        state.step = MAX_STEP;
-      } else {
+      if (state.step < MAX_STEP) {
         state.step += 1;
+        if (!state.visitedSteps.includes(state.step)) {
+          state.visitedSteps.push(state.step);
+        }
       }
     },
     prevStep: (state: stepState) => {
-      if (state.step === 1) {
-        state.step = 1;
-      } else {
+      if (state.step > 1) {
+        state.visitedSteps = state.visitedSteps.filter(
+          (step) => step !== state.step,
+        );
         state.step -= 1;
       }
     },
