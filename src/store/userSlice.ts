@@ -28,11 +28,17 @@ interface Project {
   description: string;
 }
 
+interface Skill {
+  title: string;
+  description: string;
+}
+
 interface resumeState {
   user: User | null;
   education: Education | null;
   experience: Experience | null;
   project: Project | null;
+  skill: Skill | null;
 }
 
 const initialState: resumeState = {
@@ -40,6 +46,7 @@ const initialState: resumeState = {
   education: null,
   experience: null,
   project: null,
+  skill: null,
 };
 
 export const userSlice = createSlice({
@@ -58,10 +65,13 @@ export const userSlice = createSlice({
     setProject: (state: resumeState, action: PayloadAction<Project>) => {
       state.project = action.payload;
     },
+    setSkill: (state: resumeState, action: PayloadAction<Skill>) => {
+      state.skill = action.payload;
+    },
   },
 });
 
-export const { setUser, setEducation, setExperience, setProject } =
+export const { setUser, setEducation, setExperience, setProject, setSkill } =
   userSlice.actions;
 
 export default userSlice.reducer;
