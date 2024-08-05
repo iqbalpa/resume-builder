@@ -14,14 +14,24 @@ interface Education {
   endTime: string;
 }
 
+interface Experience {
+  company: string;
+  role: string;
+  startTime: string;
+  endTime: string;
+  description: string;
+}
+
 interface resumeState {
   user: User | null;
   education: Education | null;
+  experience: Experience | null;
 }
 
 const initialState: resumeState = {
   user: null,
   education: null,
+  experience: null,
 };
 
 export const userSlice = createSlice({
@@ -34,9 +44,12 @@ export const userSlice = createSlice({
     setEducation: (state: resumeState, action: PayloadAction<Education>) => {
       state.education = action.payload;
     },
+    setExperience: (state: resumeState, action: PayloadAction<Experience>) => {
+      state.experience = action.payload;
+    },
   },
 });
 
-export const { setUser, setEducation } = userSlice.actions;
+export const { setUser, setEducation, setExperience } = userSlice.actions;
 
 export default userSlice.reducer;
