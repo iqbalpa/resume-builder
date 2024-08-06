@@ -35,7 +35,7 @@ interface Skill {
 
 interface resumeState {
   user: User | null;
-  education: Education | null;
+  education: Education[];
   experience: Experience | null;
   project: Project | null;
   skill: Skill | null;
@@ -43,7 +43,7 @@ interface resumeState {
 
 const initialState: resumeState = {
   user: null,
-  education: null,
+  education: [],
   experience: null,
   project: null,
   skill: null,
@@ -56,7 +56,7 @@ export const userSlice = createSlice({
     setUser: (state: resumeState, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
-    setEducation: (state: resumeState, action: PayloadAction<Education>) => {
+    setEducation: (state: resumeState, action: PayloadAction<Education[]>) => {
       state.education = action.payload;
     },
     setExperience: (state: resumeState, action: PayloadAction<Experience>) => {
@@ -68,10 +68,19 @@ export const userSlice = createSlice({
     setSkill: (state: resumeState, action: PayloadAction<Skill>) => {
       state.skill = action.payload;
     },
+    addEducation: (state: resumeState, action: PayloadAction<Education>) => {
+      state.education = [...state.education, action.payload];
+    },
   },
 });
 
-export const { setUser, setEducation, setExperience, setProject, setSkill } =
-  userSlice.actions;
+export const {
+  setUser,
+  setEducation,
+  setExperience,
+  setProject,
+  setSkill,
+  addEducation,
+} = userSlice.actions;
 
 export default userSlice.reducer;

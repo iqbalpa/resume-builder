@@ -47,7 +47,7 @@ const HomeModule: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <div className="my-20 flex w-screen items-center justify-center">
       <div className="flex w-3/5 flex-col gap-3 rounded-md border-2 border-slate-500 p-5">
         <Stepper steps={steps} />
         <h1 className="text-center text-2xl font-bold">
