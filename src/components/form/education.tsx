@@ -10,11 +10,13 @@ import {
   University,
 } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addEducation } from '@/store/userSlice';
+import { addEducation, removeEducation } from '@/store/userSlice';
 import { RootState } from '@/store/store';
+import { v4 as uuidv4 } from 'uuid';
 
 type EducationInputs = {
   educations: {
+    id: string;
     univ: string;
     year: number;
     major: string;
@@ -40,6 +42,7 @@ const EducationForm: React.FC = () => {
           ? savedEducations
           : [
               {
+                id: uuidv4(),
                 univ: '',
                 year: new Date().getFullYear(),
                 major: '',
@@ -56,6 +59,10 @@ const EducationForm: React.FC = () => {
   const saveEducation = (data: EducationInputs) => {
     data.educations.forEach((education) => dispatch(addEducation(education)));
   };
+  const handleRemove = (index: number, id: string) => {
+    remove(index);
+    dispatch(removeEducation(id));
+  };
 
   return (
     <form className="flex w-full flex-col">
@@ -65,7 +72,7 @@ const EducationForm: React.FC = () => {
           className="mb-4 flex flex-row items-center gap-3 rounded-lg border-[1px] border-slate-500 p-4"
         >
           <button
-            onClick={() => remove(index)}
+            onClick={() => handleRemove(index, field.id)}
             className="rounded-lg border-[1px] border-red-400 bg-red-300 p-2 duration-100 hover:cursor-pointer hover:bg-red-400"
           >
             <Trash2 />
@@ -167,6 +174,7 @@ const EducationForm: React.FC = () => {
           type="button"
           onClick={() =>
             append({
+              id: uuidv4(),
               univ: '',
               year: new Date().getFullYear(),
               major: '',

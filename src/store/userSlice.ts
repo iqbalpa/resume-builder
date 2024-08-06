@@ -7,6 +7,7 @@ interface User {
 }
 
 interface Education {
+  id: string;
   univ: string;
   year: number;
   major: string;
@@ -71,6 +72,11 @@ export const userSlice = createSlice({
     addEducation: (state: resumeState, action: PayloadAction<Education>) => {
       state.education = [...state.education, action.payload];
     },
+    removeEducation: (state: resumeState, action: PayloadAction<string>) => {
+      state.education = state.education.filter(
+        (edu) => edu.id !== action.payload,
+      );
+    },
   },
 });
 
@@ -81,6 +87,7 @@ export const {
   setProject,
   setSkill,
   addEducation,
+  removeEducation,
 } = userSlice.actions;
 
 export default userSlice.reducer;
