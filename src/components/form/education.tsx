@@ -9,8 +9,9 @@ import {
   Trash2,
   University,
 } from 'lucide-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addEducation } from '@/store/userSlice';
+import { RootState } from '@/store/store';
 
 type EducationInputs = {
   educations: {
@@ -23,6 +24,9 @@ type EducationInputs = {
 };
 
 const EducationForm: React.FC = () => {
+  const savedEducations = useSelector(
+    (state: RootState) => state.user.education,
+  );
   const dispatch = useDispatch();
   const {
     control,
@@ -31,15 +35,18 @@ const EducationForm: React.FC = () => {
     formState: { errors },
   } = useForm<EducationInputs>({
     defaultValues: {
-      educations: [
-        {
-          univ: '',
-          year: new Date().getFullYear(),
-          major: '',
-          startTime: '',
-          endTime: '',
-        },
-      ],
+      educations:
+        savedEducations.length > 0
+          ? savedEducations
+          : [
+              {
+                univ: '',
+                year: new Date().getFullYear(),
+                major: '',
+                startTime: '',
+                endTime: '',
+              },
+            ],
     },
   });
   const { fields, append, remove } = useFieldArray({
